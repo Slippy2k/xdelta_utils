@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="xdelta3-cfgs.h" />
+    <ClInclude Include="xdelta3-decode.h" />
+    <ClInclude Include="xdelta3-djw.h" />
+    <ClInclude Include="xdelta3-fgk.h" />
+    <ClInclude Include="xdelta3-hash.h" />
+    <ClInclude Include="xdelta3-internal.h" />
+    <ClInclude Include="xdelta3-list.h" />
+    <ClInclude Include="xdelta3-lzma.h" />
+    <ClInclude Include="xdelta3-main.h" />
+    <ClInclude Include="xdelta3-merge.h" />
+    <ClInclude Include="xdelta3-second.h" />
+    <ClInclude Include="xdelta3-test.h" />
+    <ClInclude Include="xdelta3.h" />
+    <ClInclude Include="xdelta3-blkcache.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xdelta3.1" />
+    <None Include="xdelta3.i" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="xdelta3.c" />
+  </ItemGroup>
+</Project>
