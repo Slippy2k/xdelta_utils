@@ -1,0 +1,277 @@
+
+namespace fd
+{
+  // ----------------------------------------------------------------------
+  
+  class bad_function_call;
+  class bad_member_function_call;
+  
+  // ======================================================================
+  //
+  // class delegateN (Portable Syntax)
+  //
+  // ======================================================================
+  
+  template<typename R,typename T1,typename T2,...,typename TN,
+       typename Alloocator = std::allocator<void>,size_t t_countof_pvoid = 2>
+  class delegateN;
+  
+  // ----------------------------------------------------------------------
+
+  // default c'tor 
+  delegateN<R, T1, T2, ..., TN>::delegateN();
+  
+  // ----------------------------------------------------------------------
+  
+  // copy c'tor for 0
+  delegateN<R, T1, T2, ..., TN>::delegateN(implClass::clear_type const *);
+  
+  // ----------------------------------------------------------------------
+  
+  // copy c'tor
+  delegateN<R, T1, T2, ..., TN>::delegateN(delegateN<R, T1, T2, ..., TN> const & other);
+  
+  // ----------------------------------------------------------------------
+  
+  // function copy c'tor
+  delegateN<R, T1, T2, ..., TN>::delegateN(R (*fn)(T1, T2, ..., TN);
+  
+  // ----------------------------------------------------------------------
+  
+  // member function adapter copy c'tors
+  
+  //  ,where T1 can be trivially converted to either U * or U &
+  delegateN<R, T1, T2, ..., TN>::delegateN(R (U::*mfn)(T2, T3, ..., TN));
+  
+  //  ,where T1 can be trivially converted to one of  U * or U const * or U & or U const &
+  delegateN<R, T1, T2, ..., TN>::delegateN(R (U::*mfn)(T2, T3, ..., TN) const);
+  
+  // ----------------------------------------------------------------------
+  
+  // member function argument binding copy c'tors
+  delegateN<R, T1, T2, ..., TN>::delegateN(R (U::*mfn)(T1, T2, ..., TN), T & obj);
+  
+  delegateN<R, T1, T2, ..., TN>::delegateN(R (U::*mfn)(T1, T2, ..., TN) const, T & obj);
+  
+  delegateN<R, T1, T2, ..., TN>::delegateN(R (U::*mfn)(T1, T2, ..., TN), T * obj);
+  
+  delegateN<R, T1, T2, ..., TN>::delegateN(R (U::*mfn)(T1, T2, ..., TN) const, T * obj);
+  
+  // ----------------------------------------------------------------------
+  
+  // functor copy c'tors
+  template<typename Functor>
+  delegateN<R, T1, T2, ..., TN>::delegateN(Functor & ftor, bool/* dummy*/);
+  
+  template<typename Functor>
+  delegateN<R, T1, T2, ..., TN>::delegateN(Functor * ftor, bool/* dummy*/);
+  
+  // ----------------------------------------------------------------------
+
+  // assignment from 0
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (implClass::clear_type const *);
+  
+  // ----------------------------------------------------------------------
+  
+  // assignment operator
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (delegateN<R, T1, T2, ..., TN> const & other);
+  
+  // ----------------------------------------------------------------------
+  
+  // function assignment operator
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (R (*fn)(T1, T2, ..., TN);
+  
+  // ----------------------------------------------------------------------
+  
+  // member function adapter assignment operators
+  
+  //  ,where T1 can be trivially converted to either U * or U &
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (R (U::*mfn)(T2, ..., TN));
+  
+  //  ,where T1 can be trivially converted to one of  U * or U const * or U & or U const &
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (R (U::*mfn)(T2, ..., TN) const);
+  
+  // ----------------------------------------------------------------------
+  
+  // member function argument binding assignment operators
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (R (U::*mfn)(T1, T2, ..., TN), T & obj);
+  
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (R (U::*mfn)(T1, T2, ..., TN) const, T & obj);
+  
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (R (U::*mfn)(T1, T2, ..., TN), T * obj);
+  
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator = (R (U::*mfn)(T1, T2, ..., TN) const, T * obj);
+  
+  // ----------------------------------------------------------------------
+  
+  // functor assignment operators
+  template<typename Functor>
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator <<= (Functor & ftor);
+  
+  template<typename Functor>
+  delegateN<R, T1, T2, ..., TN> &
+  delegateN<R, T1, T2, ..., TN>::operator <<= (Functor * ftor);
+  
+  // ----------------------------------------------------------------------
+  
+  // invocation operator
+  result_type operator ()(T1 p1, T2 p2, ..., TN pN) const;
+
+  // ----------------------------------------------------------------------
+  
+  // swap
+  void delegateN<R, T1, T2, ..., TN>::swap(delegateN & other);
+  
+  // ----------------------------------------------------------------------
+  
+  // clear
+  void delegateN<R, T1, T2, ..., TN>::clear();
+
+  // ----------------------------------------------------------------------
+  
+  // empty
+  bool delegateN<R, T1, T2, ..., TN>::empty() const;
+  
+  // ----------------------------------------------------------------------
+
+  // comparison for 0
+  bool operator == (implClass::clear_type const *) const;
+  
+  bool operator != (implClass::clear_type const *) const;
+
+  // ----------------------------------------------------------------------
+
+  // compare  
+  int compare(delegateN const & other, bool check_bound_object = false) const;
+ 
+  // comparison operators  
+  bool operator == (delegateN<R, T1, T2, ..., TN> const & other) const;
+  bool operator != (delegateN<R, T1, T2, ..., TN> const & other) const;
+  bool operator <= (delegateN<R, T1, T2, ..., TN> const & other) const;
+  bool operator <  (delegateN<R, T1, T2, ..., TN> const & other) const;
+  bool operator >= (delegateN<R, T1, T2, ..., TN> const & other) const;
+  bool operator >  (delegateN<R, T1, T2, ..., TN> const & other) const;
+  
+  // ======================================================================
+  //
+  // class delegate (Preferred Syntax)
+  //
+  // ======================================================================
+  
+  template<typename R,typename T1,typename T2,...,typename TN,
+       typename Allocator = std::allocator<void>,size_t t_countof_pvoid = 2>
+  class delegate<R (T1, T2, ..., TN), Allocator, t_countof_pvoid>;
+
+  //
+  // the same set of member functions as fd::delegateN of Portable Syntax
+  //
+
+  // ======================================================================
+  //
+  // fd::make_delegate()
+  //
+  // ======================================================================
+
+  // make_delegate for function
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  make_delegate(R (*fn)(T1, T2, ..., TN));
+  
+  // ----------------------------------------------------------------------
+  
+  // make_delegate for member function adapter
+  template<typename R,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T *, T2, ..., TN>
+  make_delegate(T *, R (U::*mfn)(T2, ..., TN));
+
+  template<typename R,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T *, T2, ..., TN>
+  make_delegate(T *, R (U::*mfn)(T2, ..., TN) const);
+  
+  // ----------------------------------------------------------------------
+
+  // make_delegate for member function argument binding
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  make_delegate(R (U::*mfn)(T1, T2, ..., TN), T & obj);
+
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  make_delegate(R (U::*mfn)(T1, T2, ..., TN) const, T & obj);
+
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  make_delegate(R (U::*mfn)(T1, T2, ..., TN), T * obj);
+
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  make_delegate(R (U::*mfn)(T1, T2, ..., TN) const, T * obj);
+  
+  // ======================================================================
+  //
+  // fd::bind()
+  //
+  // ======================================================================
+
+  // bind for member function argument binding
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  bind(R (U::*mfn)(T1, T2, ..., TN), T & obj, ...);
+
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  bind(R (U::*mfn)(T1, T2, ..., TN) const, T & obj, ...);
+
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  bind(R (U::*mfn)(T1, T2, ..., TN), T * obj, ...);
+
+  template<typename R,typename T1,typename T2,...,typename TN,typename U,typename T>
+  delegateN<R, T1, T2, ..., TN>
+  bind(R (U::*mfn)(T1, T2, ..., TN) const, T * obj, ...);
+
+  // ======================================================================
+  //
+  // fd::get_pointer()
+  //
+  // ======================================================================
+
+  template<typename T>
+  T * get_pointer(T * p);
+
+  template<typename T>
+  T * get_pointer(std::auto_ptr<T> & p);
+
+  // ----------------------------------------------------------------------
+
+  namespace util
+  {
+    // ======================================================================
+    //
+    // custom memory allocators (policy driven)
+    //
+    // ======================================================================
+
+    // fixed block memory allocator
+    template<typename T>
+    class fixed_allocator;
+
+    // standard memory allocator ( equivalent to std::allocator<T> )
+    template<typename T>
+    class std_allocator;
+
+  }  // namespace util
+  
+  // ----------------------------------------------------------------------
+
+} // namespace fd
